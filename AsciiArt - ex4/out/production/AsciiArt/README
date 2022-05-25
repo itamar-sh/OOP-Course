@@ -1,0 +1,26 @@
+itamar.sh
+315092759
+
+BrightnessImgCharMatcher:
+I made 2 major uses in collections at this class.
+The first is the "cache", as suggested I made a HashMap from Image to Double that keeps the info of the brightnesses
+of each sub Image of the image. If we dont change the pixels of the image we dont change the sub images so we
+will use the dictionary that already been made in the previous use.
+The second is an HashMap from Double to Character with the name "mapCharsToBrightness" its remember the chars
+of every brightness. This way we have O(1) in finding every character for every sub image.
+
+Shell:
+I used the HashSet to remember the chars. This way we dont keep duplicate and we cant add and remove chars at O(1).
+
+Algorithms:
+findDuplicate - I used smart idea we saw at Intro. Two variables, one fast and the second slow. (2 and 1 jump size)
+This way I found a cycle. Simply but let them run until they get inside a loop and than run again to find the
+value inside the loop.
+I use only 2 variables extra so O(1) to the place. The time until they find cycle is O(n) because they run only
+1 time to get inside the cycle and inside the cycle they run only 2 times until they meet. so O(n)
+
+uniqueMorseRepresentations - by making dictionary that hold the relation between the chars and their meaning in
+Morse Code And by holding another dictionary that hold the relation between the results and the words, I simply cannot
+get more results of words in the dictionary than the actual number of them so every two same results combined to
+one result. (we could use a set, and it will do the same trick, but it's the same run time.)
+In the over all I run over all the words and they Morse Code meaning so O(S).
