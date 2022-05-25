@@ -1,0 +1,62 @@
+itamar.sh
+315092759
+
+1) BrickerGameManager - we create all the objects required for the beggining. including strategy for every brick.
+the method initializeGame calls methods with the template of "create XXX" to create XXX objects.
+in the update method we deal with disposing non relevant objects and check for the end of the game.
+if we lost life - we reset some general variables to flawless start.
+
+2) Strategies - we have class for every strategy, including double behaviour for future implements.
+We have the decorator of remove brick strategy that holds object of remove strategy brick class.
+
+I chose to add strategy of change game speed. for that I made another three classes. One for the strategy herself -
+ChangeGameSpeedStrategy, two for general object of statusChanger and three GameSpeedChanger that inherit from
+statusChanger class. the ChangeGameSpeedStrategy has similar pubic class like ChangeCamera Strategy called
+"changeGameSpeed" that is be called from the objects of changeGameSpeed after they made a collision with a paddle.
+(either of them)
+
+3) BrickStrategyFactory return random strategy after make each strategy accordingly to random choice.
+we include the random choice of we get third behaviour and which of the behaviour is the third.
+
+4) ChangeCameraStrategy class, like the instructions make her behaviour after a collision of a ball, any ball,
+in the brick that holds this startegy automathically and turn the change off via the public method turnOffCameraChange.
+
+5) AddPaddleStrategy class uses the public flag called isInstantiated from the MockPaddle class to know if there is
+already an extre padddle and if there isn't we make a new paddle.
+
+6) ChangeGameSpeedStrategy class used the objects of the class GameSpeedChanger that inherit from StatusChanger.
+I use the method changeGameSpeed that the onCollision of GameSpeedChanger instances call.
+Status Changer simple cover the basic movement of that kind of objects. (I made him to furue implements)
+
+7) PuckStrategy class, in onCollision we simply made new 3 Puck instances.
+
+8) RemoveBrickStrategyDecorator - any instance of this class gets a strategy and add him the implement of
+RemoveBrickStrategy by simply make an instance of RemoveBrickStrategy that work simultaneously with our Strategy.
+its kind of wrapper of RemoveBrickStrategy to any other strategy.
+
+Algo questions:
+
+1) alotStudyTime - greedy algorithm, we sort the windows of times and the tasks. we try to be efficient and lost the
+least amount of time to spend on each task. we do that by simply take the smallest task each time and the smallest
+window that can fit to him. because we took the smallest task if some window dont fit, it cant fit to the others tasks
+as well because they larger that the smallest.
+time tunning: O(nlog(n)+mlog(m)).
+The sorting takes nlog(n) and mlog(m).
+because we move check all the the tasks and all the timeslots but each one only one.
+n is the tasks and m is the timeSlots so the loop take only O(m+n).
+
+
+2) minLeap - greedy algorithm, we run in a loop until we get to the end. we check all the options we can jump to
+right now and check which of them has the best potenial for the next round. the best solution every loop contains
+all the others options, so it has to be better.
+time running: O(n^2) because we move in each loop and check all the next leaps we can get to, potenially it can be all
+leaps. (Amortised it probably less).
+
+3) numTrees - dynamic algorithm, we build an array in size 1*(n+1) and in the i cell we check all the options to split
+(i-1) to both sub trees. the solutions are already in the previous cells in the table. we move from left to right.
+time running: O(n) because we move on the array once and each cell is constant num of operations.
+
+4) bucketWalk - dynamic algorithm, we build an array in size 1*(n) and in the i cell we add the two other last cells
+because we can get to fill i liters only if we add 1 liter from all the options to fill i-1 liters and 2 liters
+from all the options to fill i-2 liters. fibonacci.
+time running: O(n) because we move on the array once and each cell is constant num of operations.
